@@ -1,0 +1,8 @@
+TestProject/Library
+TestProject/Temp
+TestProject/obj
+*.pidb
+*.unityproj
+*.sln
+*.userprefs
+*.csproj
