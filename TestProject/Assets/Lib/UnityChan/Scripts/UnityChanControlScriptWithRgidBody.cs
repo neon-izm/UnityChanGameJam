@@ -74,7 +74,7 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 	{
 		float h = Input.GetAxis("Horizontal");				// 入力デバイスの水平軸をhで定義
 		float v = Input.GetAxis("Vertical");				// 入力デバイスの垂直軸をvで定義
-		if(v > 0.3){
+		if(v > 0.3 && GetComponent<PlayerScript>().currentPhysical > 0){
 			if(!Input.GetButton("Run")) {
 				v = 0.3f;
 			}

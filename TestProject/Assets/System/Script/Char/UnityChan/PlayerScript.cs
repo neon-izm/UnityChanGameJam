@@ -41,7 +41,7 @@ public class PlayerScript : CustomBehaviour {
 
 	new void Awake () {
 		base.Awake();
-
+		instance = this;
 		currentPhysical = maxPhysical;
 	}
 
