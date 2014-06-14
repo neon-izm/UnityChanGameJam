@@ -82,15 +82,11 @@ public class PlayerScript : CustomBehaviour {
 
 	//猫に攻撃された 
 	public void Damage () {
-		if(Random.value > 0.5 || isDamaging) return;
+		if(isDamaging) return;
 
 		//ダメージ処理 
 		AnimatorCmp.SetBool("Damage", true);
-
-		Debug.Log(isDamaging);
-
-
-
+		StartCoroutine(DamageAction());
 
 		isDamaging = true;
 	}

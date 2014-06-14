@@ -70,7 +70,7 @@ public class Cat : CustomBehaviour {
 	}
 
 	void Start () {
-
+		target = PlayerScript.Instance.transform;
 	}
 
 	void FixedUpdate () {
@@ -214,8 +214,13 @@ public class Cat : CustomBehaviour {
 		return false;
 	}
 
-	void OnTriggerEnter (Collider c) {
-		if(isJumping && c.GetComponent<PlayerScript>()) {
+	float time;
+	void OnTriggerStay (Collider c) {
+		if(!isJumping) return;
+		if(Time.time - time < 2f) return;
+		time = Time.time;
+
+		if(c.GetComponent<PlayerScript>()) {
 			PlayerScript.Instance.Damage();
 		}
 	}
