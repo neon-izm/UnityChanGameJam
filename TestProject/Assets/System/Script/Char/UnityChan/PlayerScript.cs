@@ -40,6 +40,7 @@ public class PlayerScript : CustomBehaviour {
 
 	public bool isRunning = false;
 	public bool isDamaging = false;
+	public bool isExthoust = false;
 
 	new void Awake () {
 		base.Awake();
@@ -49,24 +50,44 @@ public class PlayerScript : CustomBehaviour {
 
 	void Update ()
 	{
+		UnityChanControlScriptWithRgidBody script = GetComponent<UnityChanControlScriptWithRgidBody>();
+
+		script.inputHorizontal = Input.GetAxis("Horizontal");
+		script.inputVertical = Input.GetAxis("Vertical");
+		if(AnimatorCmp.GetBool("Damage") || isExthoust){
+			script.inputHorizontal = 0f; 
+			script.inputVertical = 0f; 
+		}
 		//ものを投げる
 		if(Input.GetButtonDown ("Throw")) {
+			script.inputThrow = true;
 			ThrowItem();
 		}
 
 		if(Input.GetButtonDown("Jump")) {
+			script.inputJump = true;
 			currentPhysical -= physicalParSecJump;
 		}
 
-		if(Input.GetButton("Run")) {
-			currentPhysical -= physicalParSecRun * Time.deltaTime;
+		if(Input.GetButton("Run") && !isExthoust) {
+			script.inputRun = true;
+			currentPhysical = Mathf.Clamp(currentPhysical - physicalParSecRun * Time.deltaTime, 0, maxPhysical);
 			isRunning = true;
 		}else {
 			isRunning = false;
 		}
 
+		if(currentPhysical == 0 && !isExthoust) {
+			isExthoust = true;
+			AnimatorCmp.SetBool("Exthoust", true);
+		}
+		if(currentPhysical >= 10 && isExthoust) {
+			isExthoust = false;
+			AnimatorCmp.SetBool("Exthoust", false);
+		}
+
 		if(!Input.GetButtonDown("Jump") && !Input.GetButton("Run")) {
-			currentPhysical = Mathf.Clamp(currentPhysical + physicalParRecover * Time.deltaTime, 0f, 100f);
+			currentPhysical = Mathf.Clamp(currentPhysical + physicalParRecover * Time.deltaTime, 0f, maxPhysical);
 
 		}
 	}

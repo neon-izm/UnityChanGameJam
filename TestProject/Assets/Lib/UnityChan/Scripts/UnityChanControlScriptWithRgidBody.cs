@@ -62,26 +62,28 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 		// CapsuleColliderコンポーネントのHeight、Centerの初期値を保存する
 		orgColHight = col.height;
 		orgVectColCenter = col.center;
-}
-
-	bool jumpFlag = false;
-	void Update () {
-		if(jumpFlag == false) jumpFlag = Input.GetButtonDown("Jump");
 	}
-	
+
+
+	public bool inputJump;
+	public bool inputRun;
+	public bool inputThrow;
+	public float inputHorizontal;
+	public float inputVertical;
+
 // 以下、メイン処理.リジッドボディと絡めるので、FixedUpdate内で処理を行う.
 	void FixedUpdate ()
 	{
-		float h = Input.GetAxis("Horizontal");				// 入力デバイスの水平軸をhで定義
-		float v = Input.GetAxis("Vertical");				// 入力デバイスの垂直軸をvで定義
-		if(v > 0.3 && GetComponent<PlayerScript>().currentPhysical > 0){
-			if(!Input.GetButton("Run")) {
-				v = 0.3f;
+		float h = inputHorizontal;				// 入力デバイスの水平軸をhで定義
+		float v = inputVertical;				// 入力デバイスの垂直軸をvで定義
+
+		if(v > 0.4 && GetComponent<PlayerScript>().currentPhysical > 0){
+			if(!inputRun) {
+				v = 0.4f;
 			}
 		}
-
 		//
-		if(Input.GetButton("Throw")){
+		if(inputThrow){
 			v = v * 0.1f;
 		}
 
@@ -90,8 +92,7 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 		anim.speed = animSpeed;								// Animatorのモーション再生速度に animSpeedを設定する
 		currentBaseState = anim.GetCurrentAnimatorStateInfo(0);	// 参照用のステート変数にBase Layer (0)の現在のステートを設定する
 		rb.useGravity = true;//ジャンプ中に重力を切るので、それ以外は重力の影響を受けるようにする
-		
-		
+
 
 		// 以下、キャラクターの移動処理
 		velocity = new Vector3(0, 0, v);		// 上下のキー入力からZ軸方向の移動量を取得
@@ -105,7 +106,7 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 			velocity *= backwardSpeed;	// 移動速度を掛ける
 		}
 		
-		if (Input.GetButtonDown("Jump")) {	// スペースキーを入力したら
+		if (inputJump) {	// スペースキーを入力したら
 
 			//アニメーションのステートがLocomotionの最中のみジャンプできる
 			if (currentBaseState.nameHash == locoState){
@@ -185,7 +186,7 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 				resetCollider();
 			}
 			// スペースキーを入力したらRest状態になる
-			if (jumpFlag) {
+			if (inputJump) {
 				anim.SetBool("Rest", true);
 			}
 		}
@@ -201,9 +202,11 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 			}
 		}
 
-		jumpFlag = false;
+		inputJump = false;
+		inputRun = false;
+		inputThrow = false;
 	}
-
+	/*
 	void OnGUI()
 	{
 		GUI.Box(new Rect(Screen.width -260, 10 ,250 ,150), "Interaction");
@@ -214,6 +217,7 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 		GUI.Label(new Rect(Screen.width -245,110,250,30),"Left Control : Front Camera");
 		GUI.Label(new Rect(Screen.width -245,130,250,30),"Alt : LookAt Camera");
 	}
+	*/
 
 
 	// キャラクターのコライダーサイズのリセット関数
