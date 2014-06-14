@@ -73,6 +73,7 @@ public class Cat : CustomBehaviour {
 
 	void Start () {
 		target = PlayerScript.Instance.transform;
+		randPos = transform.position;
 	}
 
 	void FixedUpdate () {
@@ -84,6 +85,7 @@ public class Cat : CustomBehaviour {
 
 	void ExecuteIdle () {
 		//ゴロゴロする 
+		NavMeshAgentCmp.Stop();
 	}
 
 	void ExecuteSleep () {
@@ -91,9 +93,9 @@ public class Cat : CustomBehaviour {
 
 	void ExecuteWalk () {
 		NavMeshAgentCmp.speed = walkSpeed;
-		if(Vector3.Distance(randPos, transform.position) < 2) {
-			randPos += Random.onUnitSphere * Random.value * 5;
-			randPos.y = 0;
+		if(Vector3.Distance(randPos, transform.position) < 1) {
+			randPos += Random.onUnitSphere * Random.Range(0.5f,1f) * 10;
+			randPos.y = transform.position.y;
 		}
 
 		NavMeshAgentCmp.SetDestination(randPos);
@@ -147,7 +149,8 @@ public class Cat : CustomBehaviour {
 			return stateMachine.GetState(StateEnum.WALK);
 		}
 		if(Vector3.Distance(target.position, transform.position) < 2) {
-			return stateMachine.GetState(StateEnum.JUMP);
+			if(PlayerScript.Instance.foodNumber != 0)
+				return stateMachine.GetState(StateEnum.JUMP);
 		}
 		return stateMachine.GetState(StateEnum.RUN);
 	}
@@ -172,6 +175,8 @@ public class Cat : CustomBehaviour {
 		randTime = Random.value * 7f;
 		AnimatorCmp.SetTrigger("WALK");
 		icon.Caution = false;
+		randPos = transform.position + Random.onUnitSphere * Random.Range(0.5f,1f) * 10;
+		randPos.y = transform.position.y;
 	}
 	void EnterRun () {
 		randTime = 1f;

@@ -15,12 +15,8 @@ public class PlayerScript : CustomBehaviour {
 		get { return (animatorCmp!=null)?animatorCmp:animatorCmp=GetComponent<Animator>(); }
 	}
 
-	//	[PrefixLabel("コロッケの数")]
-	public int foodNumber {
-		get {
-			return itemList.Where(i=>i.GetComponent<Croquette>() != null).ToList().Count;
-		}
-	}
+	[PrefixLabel("コロッケの数")]
+	public int foodNumber = 0;
 
 	[PrefixLabel("体力回復率")]
 	public float physicalParRecover = 10;
@@ -34,9 +30,7 @@ public class PlayerScript : CustomBehaviour {
 	[PrefixLabel("跳ぶのに必要な体力(回)")]
 	public float physicalParSecJump;
 
-	[PrefixLabel("アイテムリスト")]
 	public List<Item> itemList;
-
 
 	public bool isRunning = false;
 	public bool isDamaging = false;
@@ -108,7 +102,7 @@ public class PlayerScript : CustomBehaviour {
 		//ダメージ処理 
 		AnimatorCmp.SetBool("Damage", true);
 		StartCoroutine(DamageAction());
-
+		foodNumber --;
 		isDamaging = true;
 	}
 
@@ -131,10 +125,20 @@ public class PlayerScript : CustomBehaviour {
 		if(item) GetItem (item);
 
 		//家に到着 
+		if(c.tag == "Goal") {
+			Clear();
+		}
 
+		if(c.tag == "Goal") {
+			Respawn();
+		}
 
 		//店に到着 
-
+		if(c.tag == "Shop") {
+			//10個買う 
+			foodNumber += 10;
+			c.gameObject.SetActive(false);
+		}
 	}
 
 
@@ -155,4 +159,15 @@ public class PlayerScript : CustomBehaviour {
 	
 	}
 	#endif
+
+	//クリア処理 
+	void Clear () {
+		Debug.Log("Clear : " + foodNumber);
+
+	}
+
+	void Respawn () {
+		Debug.Log("Respawn");
+		Application.LoadLevel(Application.loadedLevel);
+	}
 }
