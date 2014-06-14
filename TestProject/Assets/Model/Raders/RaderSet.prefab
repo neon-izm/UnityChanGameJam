@@ -29,7 +29,7 @@ GameObject:
   - 23: {fileID: 2300000}
   m_Layer: 8
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: Respawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -73,7 +73,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: -4.37113883e-08}
-  m_LocalPosition: {x: -9.50544739, y: -43.9920654, z: 15.7594376}
+  m_LocalPosition: {x: -30, y: -43.9920654, z: 24}
   m_LocalScale: {x: 37, y: 1, z: 37}
   m_Children: []
   m_Father: {fileID: 400000}
@@ -85,7 +85,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
   m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106829}
-  m_LocalPosition: {x: .180000007, y: .0149536133, z: -.00156933069}
+  m_LocalPosition: {x: -12.5746975, y: .0149511695, z: 20.4225655}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400000}
@@ -98,14 +98,14 @@ Camera:
   m_GameObject: {fileID: 100004}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
+  m_ClearFlags: 3
   m_BackGroundColor: {r: 1, g: 1, b: 1, a: .0196078438}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: .0900000036
-    y: 1
+    x: .00999999978
+    y: .49000001
     width: .400000006
-    height: .400000006
+    height: .5
   near clip plane: .300000012
   far clip plane: 1000
   field of view: 60
@@ -183,6 +183,7 @@ MonoBehaviour:
   PlayerMarker: {fileID: 100004, guid: 66afc10e1505a364eb45c5aa22f5a957, type: 2}
   EnemyMarker: {fileID: 100000, guid: ff7fde722ba8c5541b5c8a2d44f171ff, type: 2}
   GoalMarker: {fileID: 100000, guid: c128b6a0972204e40a3b098d3887b24b, type: 2}
+  ShopMarker: {fileID: 100000, guid: 81f98fb5e53002a4cbeab560930c770d, type: 2}
 --- !u!124 &12400000
 Behaviour:
   m_ObjectHideFlags: 1
