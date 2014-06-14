@@ -29,8 +29,6 @@ public class PlayerScript : CustomBehaviour {
 	[System.NonSerialized]//[PrefixLabel("現在の体力")]
 	public float currentPhysical;
 
-
-
 	[PrefixLabel("走るのに必要な体力(秒)")]
 	public float physicalParSecRun;
 	[PrefixLabel("跳ぶのに必要な体力(回)")]
@@ -38,6 +36,10 @@ public class PlayerScript : CustomBehaviour {
 
 	[PrefixLabel("アイテムリスト")]
 	public List<Item> itemList;
+
+
+	public bool isRunning = false;
+	public bool isDamaging = false;
 
 	new void Awake () {
 		base.Awake();
@@ -55,8 +57,12 @@ public class PlayerScript : CustomBehaviour {
 		if(Input.GetButtonDown("Jump")) {
 			currentPhysical -= physicalParSecJump;
 		}
+
 		if(Input.GetButton("Run")) {
 			currentPhysical -= physicalParSecRun * Time.deltaTime;
+			isRunning = true;
+		}else {
+			isRunning = false;
 		}
 
 		if(!Input.GetButtonDown("Jump") && !Input.GetButton("Run")) {
@@ -75,7 +81,29 @@ public class PlayerScript : CustomBehaviour {
 	}
 
 	//猫に攻撃された 
-	void Damage () {
+	public void Damage () {
+		if(Random.value > 0.5 || isDamaging) return;
+
+		//ダメージ処理 
+		AnimatorCmp.SetBool("Damage", true);
+
+		Debug.Log(isDamaging);
+
+
+
+
+		isDamaging = true;
+	}
+
+	IEnumerator DamageAction () {
+		yield return new WaitForSeconds(1.5f);
+		AnimatorCmp.SetBool("Damage", false);
+		yield return new WaitForSeconds(3f);
+		isDamaging = false;
+	}
+
+	public void LockOn (Cat cat) {
+
 
 	}
 
