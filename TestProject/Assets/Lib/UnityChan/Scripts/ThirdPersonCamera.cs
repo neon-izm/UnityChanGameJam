@@ -16,8 +16,10 @@ public class ThirdPersonCamera : MonoBehaviour
 	
 	// スムーズに繋がない時（クイック切り替え）用のブーリアンフラグ
 	bool bQuickSwitch = false;	//Change Camera Position Quickly
-	
-	
+
+	float camHorizontalValue = 0;
+	float camVerticalValue = 0;
+
 	void Start()
 	{
 		// 各参照の初期化
@@ -32,33 +34,35 @@ public class ThirdPersonCamera : MonoBehaviour
 		//カメラをスタートする
 			transform.position = standardPos.position;	
 			transform.forward = standardPos.forward;	
+
 	}
 
 	
 	void FixedUpdate ()	// このカメラ切り替えはFixedUpdate()内でないと正常に動かない
 	{
-		
-		if(Input.GetButton("Fire1"))	// left Ctlr
-		{	
-			// Change Front Camera
-			setCameraPositionFrontView();
-		}
-		
-		else if(Input.GetButton("Fire2"))	//Alt
+
+		if(Input.GetButton("Jump"))	//Alt
 		{	
 			// Change Jump Camera
 			setCameraPositionJumpView();
 		}
-		
+				
 		else
 		{	
 			// return the camera to standard position and direction
 			setCameraPositionNormalView();
 		}
+
+		setCameraPositionNormalView();
 	}
 
 	void setCameraPositionNormalView()
 	{
+		//カメラ回転
+
+
+
+
 		if(bQuickSwitch == false){
 		// the camera to standard position and direction
 						transform.position = Vector3.Lerp(transform.position, standardPos.position, Time.fixedDeltaTime * smooth);	
@@ -66,7 +70,7 @@ public class ThirdPersonCamera : MonoBehaviour
 		}
 		else{
 			// the camera to standard position and direction / Quick Change
-			transform.position = standardPos.position;	
+			transform.position = standardPos.position;
 			transform.forward = standardPos.forward;
 			bQuickSwitch = false;
 		}

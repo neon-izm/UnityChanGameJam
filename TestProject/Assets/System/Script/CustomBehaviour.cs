@@ -5,4 +5,8 @@ using System.Linq;
 
 public class CustomBehaviour : MonoBehaviour {
 
+	protected void Awake () {
+
+	}
+
 }
