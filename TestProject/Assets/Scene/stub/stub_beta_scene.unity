@@ -19995,6 +19995,7 @@ GameObject:
   - 4: {fileID: 513435351}
   - 33: {fileID: 513435353}
   - 23: {fileID: 513435352}
+  - 65: {fileID: 513435354}
   m_Layer: 0
   m_Name: BridgeSmall_size_x7_y5_z24
   m_TagString: Untagged
@@ -20044,6 +20045,19 @@ MeshFilter:
   m_PrefabInternal: {fileID: 85484875}
   m_GameObject: {fileID: 513435350}
   m_Mesh: {fileID: 4300000, guid: a4f97325644d61149aac268150adf5ea, type: 3}
+--- !u!65 &513435354
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6500018, guid: 9776afd86badb4eaeb79205a6373fe34,
+    type: 2}
+  m_PrefabInternal: {fileID: 85484875}
+  m_GameObject: {fileID: 513435350}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 7, y: 5.00000095, z: 24}
+  m_Center: {x: 0, y: 2.49999905, z: 0}
 --- !u!1 &514167680
 GameObject:
   m_ObjectHideFlags: 0
