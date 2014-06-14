@@ -3,69 +3,61 @@ using System.Collections;
 
 public class ScoreBoardManager : MonoBehaviour {
 
-	public GameObject no1;
-	public GameObject no2;
-	public GameObject no3;
-	public GameObject no4;
-	public GameObject no5;
-	public GameObject no6;
-	public GameObject no7;
-	public GameObject no8;
-	public GameObject no9;
+	public GameObject croquette_object;
+	public GameObject croquettenum_object;
 
-	public GameObject tendigit_object;
-	public GameObject tendigitnum_object;
+	public GameObject stone_object;
+	public GameObject stonenum_object;
 
-	public UISprite[] no_list;
+	public GameObject catnip_object;
+	public GameObject catnipnum_object;
 
-	public UISprite tendigit_sprite;
-	public UISprite tendigitnum_sprite;
+	public GameObject fatigue_gauge;
+
+	public GameObject timenum_object;
 
 	public int croquette_num;
+	public int stone_num;
+	public int catnip_num;
+
+	public float fatigue_rate;
+	public float fatigue_gauge_long;
+	public float fatigue_gauge_long_temp;
+
+	public float left_time;
+
+	public AnimationClip redEffect;
+	public AnimationClip greenEffect;
+
 
 	void displayCroqScore(){
-		int onedigit_num = croquette_num % 10;
-		int tendigit_num = croquette_num / 10;
+		croquettenum_object.GetComponent<UILabel> ().text = "" + croquette_num;
+		stonenum_object.GetComponent<UILabel> ().text = "" + stone_num;
+		catnipnum_object.GetComponent<UILabel> ().text = "" + catnip_num;
 
-		//１の桁より大きいオブジェクトを非表示にする。
-		for(int i =0;i<9;i++){
-			if (i > onedigit_num) {
-				no_list [i].renderer.enabled = false;
-			} else {
-				no_list [i].renderer.enabled = true;
-			}
-		}
+		fatigue_gauge.transform.localScale = new Vector3 (fatigue_gauge_long * fatigue_rate, fatigue_gauge.transform.localScale.y, fatigue_gauge.transform.localScale.z);
+		fatigue_gauge_long_temp = fatigue_gauge_long * fatigue_rate;
 
-		//10個の固まりが何個あるか表示する
-		if (tendigit_num <= 0) {
-			tendigit_object.renderer.enabled = false;
-			tendigitnum_object.renderer.enabled = false;
-		} else {
-			tendigit_object.renderer.enabled = true;
-			tendigitnum_object.renderer.enabled = true;
-			tendigitnum_object.GetComponent<UILabel> ().text = "" + tendigit_num;
-		}
+		int time_string_second = (int)left_time % 60;
+		int time_string_minute = ((int)left_time / 60) % 100;
+
+		timenum_object.GetComponent<UILabel> ().text = string.Format ("{0:D2}", time_string_minute) + ":" + string.Format ("{0:D2}", time_string_second);
 	}
 
 	// Use this for initialization
 	void Start () {
 		croquette_num = 0;
-		no_list = new UISprite[] {
-			no1.GetComponent<UISprite> (),
-			no2.GetComponent<UISprite> (),
-			no3.GetComponent<UISprite> (),
-			no4.GetComponent<UISprite> (),
-			no5.GetComponent<UISprite> (),
-			no6.GetComponent<UISprite> (),
-			no7.GetComponent<UISprite> (),
-			no8.GetComponent<UISprite> (),
-			no9.GetComponent<UISprite> ()
-		};
+		catnip_num = 1;
+		stone_num = 2;
+		fatigue_gauge_long = fatigue_gauge.transform.localScale.x;
+		left_time = Time.time;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		left_time = Time.time;
 		displayCroqScore ();
 		croquette_num++;
+		fatigue_rate = Mathf.Abs(Mathf.Sin (Time.time));
 	}
 }

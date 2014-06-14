@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 400000}
   - 114: {fileID: 11400000}
   m_Layer: 0
-  m_Name: ArialBig
+  m_Name: ArialLarge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -60,9 +60,9 @@ MonoBehaviour:
   mPixelSize: 1
   mSymbols: []
   mDynamicFont: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-  mDynamicFontSize: 70
-  mDynamicFontStyle: 0
-  mDynamicFontOffset: 43.2314453
+  mDynamicFontSize: 30
+  mDynamicFontStyle: 1
+  mDynamicFontOffset: 11.2314453
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
