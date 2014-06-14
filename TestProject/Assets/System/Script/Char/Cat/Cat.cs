@@ -59,18 +59,18 @@ public class Cat : CustomBehaviour {
 		stateMachine = new ALT.StateMachine<StateEnum>(
 			new Dictionary<StateEnum, ALT.State> () {
 				{StateEnum.EMPTY, new ALT.State(null, null, null, null)},
-				{StateEnum.IDLE, new ALT.State(ExecuteIdle, DecideIdle, null, null)},
-				{StateEnum.SLEEP, new ALT.State(ExecuteSleep, DecideSleep, null, null)},
-				{StateEnum.WALK, new ALT.State(ExecuteWalk, DecideWalk, null, null)},
-				{StateEnum.RUN, new ALT.State(ExecuteRun, DecideRun, null, null)},
-				{StateEnum.JUMP, new ALT.State(ExecuteJump, DecideJump, null, null)},
+				{StateEnum.IDLE, new ALT.State(ExecuteIdle, DecideIdle, EnterIdle, null)},
+				{StateEnum.SLEEP, new ALT.State(ExecuteSleep, DecideSleep, EnterSleep, null)},
+				{StateEnum.WALK, new ALT.State(ExecuteWalk, DecideWalk, EnterWalk, null)},
+				{StateEnum.RUN, new ALT.State(ExecuteRun, DecideRun, EnterRun, null)},
+				{StateEnum.JUMP, new ALT.State(ExecuteJump, DecideJump, EnterJump, null)},
 			},
 			defaultState
 		);
 	}
 
 	void Start () {
-
+		target = PlayerScript.Instance.transform;
 	}
 
 	void FixedUpdate () {
@@ -82,10 +82,6 @@ public class Cat : CustomBehaviour {
 
 	void ExecuteIdle () {
 		//ゴロゴロする 
-
-
-
-
 	}
 
 	void ExecuteSleep () {
@@ -102,6 +98,9 @@ public class Cat : CustomBehaviour {
 	}
 
 	void ExecuteRun () {
+		randTime -= Time.deltaTime;
+		if(randTime > 0) return;
+
 		NavMeshAgentCmp.speed = runSpeed;
 		NavMeshAgentCmp.SetDestination(target.position);
 	}
@@ -110,10 +109,18 @@ public class Cat : CustomBehaviour {
 		NavMeshAgentCmp.SetDestination(target.position);
 	}
 
+	float randTime = 0;
+
 	ALT.State DecideIdle () {
-		if(CheckPlayerInRange()) {
+		randTime -= Time.deltaTime;
+		if(randTime < 0) {
+			return stateMachine.GetState(StateEnum.WALK);
+		}
+
+		if(CheckPlayerInRange() && randTime < 2) {
 			return stateMachine.GetState(StateEnum.RUN);
 		}
+
 		return stateMachine.GetState(StateEnum.IDLE);
 	}
 
@@ -123,6 +130,10 @@ public class Cat : CustomBehaviour {
 	}
 
 	ALT.State DecideWalk () {
+		randTime -= Time.deltaTime;
+		if(randTime < 0) {
+			return stateMachine.GetState(StateEnum.IDLE);
+		}
 		if(CheckPlayerInRange()) {
 			return stateMachine.GetState(StateEnum.RUN);
 		}
@@ -133,21 +144,62 @@ public class Cat : CustomBehaviour {
 		if(CheckGiveUpRange()) {
 			return stateMachine.GetState(StateEnum.WALK);
 		}
-		if(Vector3.Distance(target.position, transform.position) < 3) {
-			//			stateMachine.ChangeState(StateEnum.JUMP);
+		if(Vector3.Distance(target.position, transform.position) < 2) {
+			return stateMachine.GetState(StateEnum.JUMP);
 		}
 		return stateMachine.GetState(StateEnum.RUN);
 	}
 
 	ALT.State DecideJump () {
-		if(CheckJumpFinish()){
+		if(isJumping == false) {
 			return stateMachine.GetState(StateEnum.RUN);
 		}
 		return stateMachine.GetState(StateEnum.JUMP);
 	}
 
+	void EnterIdle () {
+		randTime = Random.value * 10f;
+		AnimatorCmp.SetTrigger("IDLE");
+	}
+	void EnterSleep () {
+		AnimatorCmp.SetTrigger("SLEEP");
+	}
+	void EnterWalk () {
+		randTime = Random.value * 7f;
+		AnimatorCmp.SetTrigger("WALK");
+	}
+	void EnterRun () {
+		randTime = 1f;
+		PlayerScript.Instance.LockOn(this);
+		AnimatorCmp.SetTrigger("RUN");
+	}
+	void EnterJump () {
+		AnimatorCmp.SetTrigger("JUMP");
+		StartCoroutine(JumpFinish());
+	}
+
+	bool isJumping = false;
+	IEnumerator JumpFinish () {
+		isJumping = true;
+		yield return new WaitForSeconds(1.5f);
+		isJumping = false;
+	}
+
 	bool CheckPlayerInRange () {
 		Vector3 pos = PlayerScript.Instance.transform.position;
+
+		//耳 
+		if(PlayerScript.Instance.isRunning) {
+			if(Vector3.Distance(pos, transform.position) < earLength){
+				return true;
+			}
+		}
+		//目
+		if(Vector3.Distance(pos, transform.position) < eyeLength
+			&& Vector3.Angle(pos-transform.position, transform.forward) < 60){
+			return true;
+		}
+		//鼻
 		if(Vector3.Distance(pos, transform.position) < noseLength){
 			return true;
 		}
@@ -162,18 +214,15 @@ public class Cat : CustomBehaviour {
 		return false;
 	}
 
-	bool CheckJumpFinish () {
+	float time;
+	void OnTriggerStay (Collider c) {
+		if(!isJumping) return;
+		if(Time.time - time < 2f) return;
+		time = Time.time;
 
-
-		return false;
-	}
-
-	void OnDrawGizmosSelected ()
-	{
-		Gizmos.color = Color.red;
-		Gizmos.DrawWireSphere(transform.position, noseLength);
-		Gizmos.color = Color.yellow;
-		Gizmos.DrawWireSphere(transform.position, earLength);
+		if(c.GetComponent<PlayerScript>()) {
+			PlayerScript.Instance.Damage();
+		}
 	}
 
 }

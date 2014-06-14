@@ -4,6 +4,7 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
+<<<<<<< HEAD
   m_Scenes:
   - enabled: 1
     path: Assets/Scene/UI/Title/TitleScene.unity
@@ -15,3 +16,6 @@ EditorBuildSettings:
     path: Assets/Scene/UI/Title/Stage2.unity
   - enabled: 1
     path: Assets/Scene/UI/Title/Stage3.unity
+=======
+  m_Scenes: []
+>>>>>>> 6b864dee1e85979d987365b5c46b209a1553b8ba

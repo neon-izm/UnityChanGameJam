@@ -86,7 +86,7 @@ namespace ALT {
 
 		public void ChangeState (T stateID)
 		{
-			if (!stateMachineTable.Keys.Contains (stateID)) {
+			if (stateMachineTable.Keys.Contains (stateID)) {
 				currentState = stateMachineTable [stateID];
 			} else {
 				Debug.LogError ("stateMachineTableに存在しないStateです");
