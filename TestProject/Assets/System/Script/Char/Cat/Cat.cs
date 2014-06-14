@@ -40,6 +40,8 @@ public class Cat : CustomBehaviour {
 	[PrefixLabel("あきらめる範囲")]
 	public float giveUpLength;
 
+	public CatIcon icon;
+
 	public StateEnum stateEnum;
 	private Vector3 randPos;
 
@@ -160,18 +162,22 @@ public class Cat : CustomBehaviour {
 	void EnterIdle () {
 		randTime = Random.value * 10f;
 		AnimatorCmp.SetTrigger("IDLE");
+		icon.Caution = false;
 	}
 	void EnterSleep () {
 		AnimatorCmp.SetTrigger("SLEEP");
+		icon.Caution = false;
 	}
 	void EnterWalk () {
 		randTime = Random.value * 7f;
 		AnimatorCmp.SetTrigger("WALK");
+		icon.Caution = false;
 	}
 	void EnterRun () {
 		randTime = 1f;
 		PlayerScript.Instance.LockOn(this);
 		AnimatorCmp.SetTrigger("RUN");
+		icon.Caution = true;
 	}
 	void EnterJump () {
 		AnimatorCmp.SetTrigger("JUMP");

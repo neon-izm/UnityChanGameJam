@@ -71,7 +71,7 @@ public class PlayerScript : CustomBehaviour {
 
 		if(Input.GetButton("Run") && !isExthoust) {
 			script.inputRun = true;
-			currentPhysical = Mathf.Clamp(currentPhysical - physicalParSecRun * Time.deltaTime, 0, maxPhysical);
+			currentPhysical = Mathf.Clamp(currentPhysical - physicalParSecRun * Time.deltaTime * script.inputVertical, 0, maxPhysical);
 			isRunning = true;
 		}else {
 			isRunning = false;
