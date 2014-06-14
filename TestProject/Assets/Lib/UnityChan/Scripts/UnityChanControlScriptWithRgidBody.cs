@@ -63,7 +63,11 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 		orgColHight = col.height;
 		orgVectColCenter = col.center;
 }
-	
+
+	bool jumpFlag = false;
+	void Update () {
+		if(jumpFlag == false) jumpFlag = Input.GetButtonDown("Jump");
+	}
 	
 // 以下、メイン処理.リジッドボディと絡めるので、FixedUpdate内で処理を行う.
 	void FixedUpdate ()
@@ -181,7 +185,7 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 				resetCollider();
 			}
 			// スペースキーを入力したらRest状態になる
-			if (Input.GetButtonDown("Jump")) {
+			if (jumpFlag) {
 				anim.SetBool("Rest", true);
 			}
 		}
@@ -196,6 +200,8 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 				anim.SetBool("Rest", false);
 			}
 		}
+
+		jumpFlag = false;
 	}
 
 	void OnGUI()

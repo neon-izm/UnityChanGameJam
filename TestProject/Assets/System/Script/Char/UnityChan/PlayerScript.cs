@@ -22,10 +22,14 @@ public class PlayerScript : CustomBehaviour {
 		}
 	}
 
+	[PrefixLabel("体力回復率")]
+	public float physicalParRecover = 10;
 	[PrefixLabel("最大体力")]
 	public float maxPhysical = 100;
 	[System.NonSerialized]//[PrefixLabel("現在の体力")]
 	public float currentPhysical;
+
+
 
 	[PrefixLabel("走るのに必要な体力(秒)")]
 	public float physicalParSecRun;
@@ -47,13 +51,21 @@ public class PlayerScript : CustomBehaviour {
 		if(Input.GetButtonDown ("Throw")) {
 			ThrowItem();
 		}
+
+		if(Input.GetButtonDown("Jump")) {
+			currentPhysical -= physicalParSecJump;
+		}
+		if(Input.GetButton("Run")) {
+			currentPhysical -= physicalParSecRun * Time.deltaTime;
+		}
+
+		if(!Input.GetButtonDown("Jump") && !Input.GetButton("Run")) {
+			currentPhysical = Mathf.Clamp(currentPhysical + physicalParRecover * Time.deltaTime, 0f, 100f);
+
+		}
 	}
 
 	void FixedUpdate () {
-		float speed = AnimatorCmp.GetFloat("speed");
-		if(speed > 0.5f) {
-
-		}
 	}
 
 	//選んだアイテムを投げる 
