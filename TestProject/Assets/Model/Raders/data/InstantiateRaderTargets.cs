@@ -6,7 +6,7 @@ public class InstantiateRaderTargets : MonoBehaviour {
 	public GameObject PlayerMarker;
 	public GameObject EnemyMarker;
 	public GameObject GoalMarker;
-	public GameObject ShopMarker;
+	//public GameObject ShopMarker;
 	// Use this for initialization
 	void Start () {
 	//
@@ -36,14 +36,16 @@ public class InstantiateRaderTargets : MonoBehaviour {
 				lGoalMarker.transform.localPosition=new Vector3(0f,0f,0f);
 			}
 		}
+		/*
 		if (ShopMarker != null) {
 			GameObject [] shops=GameObject.FindGameObjectsWithTag("Shop");
 			foreach (var item in shops) {
 				GameObject lShopMarker=(GameObject)Instantiate(ShopMarker);
 				lShopMarker.transform.parent=item.transform;
 				lShopMarker.transform.localPosition=new Vector3(0f,0f,0f);
+				lShopMarker.transform.localScale=new Vector3(15f,15f,15f);
 			}
-		}
+		}*/
 	}
 	
 	// Update is called once per frame
