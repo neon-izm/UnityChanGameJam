@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 400000}
   - 114: {fileID: 11400000}
   m_Layer: 0
-  m_Name: Arial
+  m_Name: Atlas2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36,33 +36,32 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b4eb3a400afab046abb8471a9d746d6, type: 3}
+  m_Script: {fileID: 11500000, guid: 4d0c51bb0b6e93049af5e88f93826e3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mMat: {fileID: 0}
-  mUVRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
-  mFont:
-    mSize: 0
-    mBase: 0
-    mWidth: 0
-    mHeight: 0
-    mSpriteName: 
-    mSaved: []
-  mSpacingX: 0
-  mSpacingY: 0
-  mAtlas: {fileID: 0}
-  mReplacement: {fileID: 0}
+  material: {fileID: 2100000, guid: 49ed5295bb01d5a4bb9cac8096bbe73d, type: 2}
+  sprites:
+  - name: check280x119
+    outer:
+      serializedVersion: 2
+      x: 0
+      y: 393
+      width: 280
+      height: 119
+    inner:
+      serializedVersion: 2
+      x: 0
+      y: 393
+      width: 280
+      height: 119
+    rotated: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  mCoordinates: 0
   mPixelSize: 1
-  mSymbols: []
-  mDynamicFont: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-  mDynamicFontSize: 40
-  mDynamicFontStyle: 1
-  mDynamicFontOffset: 19.2314453
+  mReplacement: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
