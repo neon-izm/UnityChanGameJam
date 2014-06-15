@@ -7,7 +7,7 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/Scene/UI/Title/TitleScene.unity
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scene/Explayn/Explain1.unity
   - enabled: 1
     path: Assets/Scene/stub/stub_beta_scene.unity
@@ -21,3 +21,9 @@ EditorBuildSettings:
     path: Assets/Scene/Explayn/Explain3.unity
   - enabled: 1
     path: Assets/Scene/Explayn/Explain4.unity
+  - enabled: 1
+    path: Assets/Scene/credit/credit.unity
+  - enabled: 1
+    path: Assets/Scene/stub/Result/ResultClear.unity
+  - enabled: 1
+    path: Assets/Scene/stub/Result/ResultTimeUp.unity
