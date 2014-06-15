@@ -60,7 +60,7 @@ public class PlayerScript : CustomBehaviour {
 		//ものを投げる
 		if(Input.GetButtonDown ("Throw")) {
 			script.inputThrow = true;
-			ThrowItem();
+			StartCoroutine( ThrowItem());
 		}
 
 		if(Input.GetButtonDown("Jump")) {
@@ -96,14 +96,19 @@ public class PlayerScript : CustomBehaviour {
 		ScoreBoardManager.Instance.fatigue_rate = currentPhysical/maxPhysical;
 
 		leftTime -= Time.deltaTime;
-		ScoreBoardManager.Instance.left_time = leftTime;
-		if(leftTime <= 0) TimeUp();
+		if(leftTime > 0) {
+			ScoreBoardManager.Instance.left_time = leftTime;
+		}else {
+			TimeUp();
+		}
 	}
 
 	//選んだアイテムを投げる 
-	void ThrowItem () {
+	IEnumerator ThrowItem () {
+		yield return new WaitForSeconds(1f);
 		Debug.Log("throw");
-
+		UnityChanControlScriptWithRgidBody script = GetComponent<UnityChanControlScriptWithRgidBody>();
+		script.inputThrow = false;
 	}
 
 	//猫に攻撃された 
@@ -160,7 +165,7 @@ public class PlayerScript : CustomBehaviour {
 		//アイテムに追加 
 		itemList.Add(item);
 	}
-
+	/*
 	#if UNITY_EDITOR 
 	void OnGUI () {
 	    
@@ -172,12 +177,12 @@ public class PlayerScript : CustomBehaviour {
 	
 	}
 	#endif
+	*/
 
 	//クリア処理 
 	void Clear () {
 		Debug.Log("Clear : " + foodNumber);
-		Tweet(foodNumber);
-		Application.LoadLevel("TitleScene");
+		Result.LoadResultClear(foodNumber);
 	}
 
 	void Respawn () {
@@ -186,6 +191,6 @@ public class PlayerScript : CustomBehaviour {
 	}
 
 	void TimeUp () {
-
+		Result.LoadResultTimeUp();
 	}
 }
