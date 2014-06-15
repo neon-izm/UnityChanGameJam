@@ -15,6 +15,8 @@ public class PlayerScript : CustomBehaviour {
 		get { return (animatorCmp!=null)?animatorCmp:animatorCmp=GetComponent<Animator>(); }
 	}
 
+	public float leftTime = 120;
+
 	[PrefixLabel("コロッケの数")]
 	public int foodNumber = 0;
 
@@ -45,6 +47,8 @@ public class PlayerScript : CustomBehaviour {
 
 	void Update ()
 	{
+		if(ScoreBoardManager.Instance == null) return;
+
 		UnityChanControlScriptWithRgidBody script = GetComponent<UnityChanControlScriptWithRgidBody>();
 
 		script.inputHorizontal = Input.GetAxis("Horizontal");
@@ -88,6 +92,12 @@ public class PlayerScript : CustomBehaviour {
 	}
 
 	void FixedUpdate () {
+		if(ScoreBoardManager.Instance == null) return;
+		ScoreBoardManager.Instance.fatigue_rate = currentPhysical/maxPhysical;
+
+		leftTime -= Time.deltaTime;
+		ScoreBoardManager.Instance.left_time = leftTime;
+		if(leftTime <= 0) TimeUp();
 	}
 
 	//選んだアイテムを投げる 
@@ -173,5 +183,9 @@ public class PlayerScript : CustomBehaviour {
 	void Respawn () {
 		Debug.Log("Respawn");
 		Application.LoadLevel(Application.loadedLevel);
+	}
+
+	void TimeUp () {
+
 	}
 }
