@@ -123,7 +123,7 @@ MonoBehaviour:
     width: 1
     height: 1
   mShader: {fileID: 10752, guid: 0000000000000000f000000000000000, type: 0}
-  mTexture: {fileID: 2800000, guid: 6225449b20af0b44d9f4bf2ede45b9a6, type: 3}
+  mTexture: {fileID: 2800000, guid: a1e9662a9432f3f41861de1b1cd8be86, type: 3}
   mMat: {fileID: 0}
 --- !u!1 &267299171
 GameObject:
@@ -326,17 +326,17 @@ MonoBehaviour:
   widgetsAreStatic: 0
   cullWhileDragging: 0
   worldToLocal:
-    e00: 207
+    e00: 160
     e01: 0
     e02: 0
-    e03: -259
+    e03: -199.639648
     e10: 0
-    e11: 207
+    e11: 160
     e12: 0
-    e13: 207
+    e13: 160
     e20: 0
     e21: 0
-    e22: 207
+    e22: 160
     e23: 0
     e30: 0
     e31: 0
@@ -371,7 +371,7 @@ TextMesh:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 787353490}
-  m_Text: "\u306A\u3093\u3068\u3001\u305D\u306E\u5F71\u306E\u6B63\u4F53\u306F\u3001\u30E6\u30CB\u30C6\u30A3\u3061\u3083\u3093\u306E\u30AB\u30EC\u30FC\u30B3\u30ED\u30C3\u30B1\u3092\r\n\u72D9\u3046\u732B\u305F\u3061\u3060\u3063\u305F\uFF01\uFF01\r\n\u679C\u305F\u3057\u3066\u30E6\u30CB\u30C6\u30A3\u3061\u3083\u3093\u306F\u3001\u732B\u305F\u3061\u3092\u632F\u308A\u5207\u308A\r\n\u7121\u4E8B\u30AB\u30EC\u30FC\u30B3\u30ED\u30C3\u30B1\u3092\u5BB6\u307E\u3067\u6301\u3061\u5E30\u308B\u3053\u3068\u304C\u3067\u304D\u308B\u304B!!!\r\n"
+  m_Text: "\n\r\n\u306A\u3093\u3068\u3001\u305D\u306E\u5F71\u306E\u6B63\u4F53\u306F\u3001\u30E6\u30CB\u30C6\u30A3\u3061\u3083\u3093\u306E\u30AB\u30EC\u30FC\u30B3\u30ED\u30C3\u30B1\u3092\r\n\u72D9\u3046\u732B\u305F\u3061\u3060\u3063\u305F\uFF01\uFF01\r\n\u679C\u305F\u3057\u3066\u30E6\u30CB\u30C6\u30A3\u3061\u3083\u3093\u306F\u3001\u732B\u305F\u3061\u3092\u632F\u308A\u5207\u308A\r\n\u7121\u4E8B\u30AB\u30EC\u30FC\u30B3\u30ED\u30C3\u30B1\u3092\u5BB6\u307E\u3067\u6301\u3061\u5E30\u308B\u3053\u3068\u304C\u3067\u304D\u308B\u304B!!!"
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -412,8 +412,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 787353490}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -15.460104, y: 5.50825071, z: 9.61916351}
-  m_LocalScale: {x: .780936897, y: 1.16375017, z: 1}
+  m_LocalPosition: {x: -10.8414621, y: 6.47046614, z: 9.61916351}
+  m_LocalScale: {x: .622309089, y: .851292372, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
@@ -511,7 +511,7 @@ Transform:
   m_GameObject: {fileID: 1249817066}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .00483091781, y: .00483091781, z: .00483091781}
+  m_LocalScale: {x: .00625000009, y: .00625000009, z: .00625000009}
   m_Children:
   - {fileID: 2082877517}
   m_Father: {fileID: 0}
@@ -675,7 +675,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1505671020}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 259, y: -207, z: 0}
+  m_LocalPosition: {x: 199.639648, y: -160, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 579943899}
@@ -728,6 +728,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: Explain4
+  clip: {fileID: 0}
 --- !u!4 &1569282211
 Transform:
   m_ObjectHideFlags: 0

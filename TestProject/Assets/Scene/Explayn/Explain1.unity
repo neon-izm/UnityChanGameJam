@@ -123,7 +123,7 @@ MonoBehaviour:
     width: 1
     height: 1
   mShader: {fileID: 10752, guid: 0000000000000000f000000000000000, type: 0}
-  mTexture: {fileID: 2800000, guid: 6225449b20af0b44d9f4bf2ede45b9a6, type: 3}
+  mTexture: {fileID: 2800000, guid: a1e9662a9432f3f41861de1b1cd8be86, type: 3}
   mMat: {fileID: 0}
 --- !u!1 &267299171
 GameObject:
@@ -371,7 +371,7 @@ TextMesh:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 787353490}
-  m_Text: "\u30E6\u30CB\u30C6\u30A3\u3061\u3083\u3093\u306F\u3001\u30AB\u30EC\u30FC\u30B3\u30ED\u30C3\u30B1\u304C\u5927\u597D\u7269\uFF08\u516C\u5F0F\uFF09\r\n\u4ECA\u65E5\u3082\u3001\u591A\u304F\u306E\u30AB\u30EC\u30FC\u30B3\u30ED\u30C3\u30B1\u3092\u8CB7\u3044\u306B\u51FA\u304B\u3051\u308B\u3088\u3046\u3060\u3002"
+  m_Text: "\u30E6\u30CB\u30C6\u30A3\u3061\u3083\u3093\u306F\u3001\u30AB\u30EC\u30FC\u30B3\u30ED\u30C3\u30B1\u304C\u5927\u597D\u7269\u4ECA\u65E5\u3082\u3001\r\n\u591A\u304F\u306E\u30AB\u30EC\u30FC\u30B3\u30ED\u30C3\u30B1\u3092\u8CB7\u3044\u306B\u51FA\u304B\u3051\u308B\u3088\u3046\u3060\u3002"
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -412,8 +412,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 787353490}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.8330297, y: 3.25725865, z: 9.61916351}
-  m_LocalScale: {x: .658125579, y: 1.07500029, z: 1}
+  m_LocalPosition: {x: -9.48593044, y: 3.25725865, z: 9.61916351}
+  m_LocalScale: {x: .785670936, y: .871354043, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
