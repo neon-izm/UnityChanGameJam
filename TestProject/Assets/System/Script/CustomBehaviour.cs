@@ -5,8 +5,8 @@ using System.Linq;
 
 public class CustomBehaviour : MonoBehaviour {
 
-	public const string Title = "てすと";
-	public const string URL = "http:";
+	public const string Title = "ご注文はカレーコロッケですか？";
+	public const string URL = "http:----------------------------";
 
 
 	protected void Awake () {

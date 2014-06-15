@@ -37,6 +37,7 @@ public class PlayerScript : CustomBehaviour {
 	public bool isExthoust = false;
 
 	new void Awake () {
+		Application.LoadLevelAdditive("ScoreScene");
 		base.Awake();
 		instance = this;
 		currentPhysical = maxPhysical;
@@ -103,6 +104,7 @@ public class PlayerScript : CustomBehaviour {
 		AnimatorCmp.SetBool("Damage", true);
 		StartCoroutine(DamageAction());
 		foodNumber --;
+		ScoreBoardManager.Instance.LostCroquette(-1);
 		isDamaging = true;
 	}
 
@@ -129,7 +131,7 @@ public class PlayerScript : CustomBehaviour {
 			Clear();
 		}
 
-		if(c.tag == "Goal") {
+		if(c.tag == "Respawn") {
 			Respawn();
 		}
 
@@ -137,6 +139,7 @@ public class PlayerScript : CustomBehaviour {
 		if(c.tag == "Shop") {
 			//10個買う 
 			foodNumber += 10;
+			ScoreBoardManager.Instance.GetCroquette(10);
 			c.gameObject.SetActive(false);
 		}
 	}
@@ -163,7 +166,8 @@ public class PlayerScript : CustomBehaviour {
 	//クリア処理 
 	void Clear () {
 		Debug.Log("Clear : " + foodNumber);
-
+		Tweet(foodNumber);
+		Application.LoadLevel("TitleScene");
 	}
 
 	void Respawn () {

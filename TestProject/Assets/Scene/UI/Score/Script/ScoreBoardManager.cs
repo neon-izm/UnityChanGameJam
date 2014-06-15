@@ -71,7 +71,7 @@ public class ScoreBoardManager : MonoBehaviour {
 
 	}
 
-	void GetCroquette(int num){
+	public void GetCroquette(int num){
 		if (num <= 0) {
 			Debug.LogError ("get croquette num is minus or zero !");
 		} else {
@@ -81,7 +81,7 @@ public class ScoreBoardManager : MonoBehaviour {
 		}
 	}
 
-	void LostCroquette(int num){
+	public void LostCroquette(int num){
 		if (num >= 0) {
 			Debug.LogError ("lost croquette num is plus or zero !");
 		} else {
@@ -91,7 +91,7 @@ public class ScoreBoardManager : MonoBehaviour {
 		}
 	}
 
-	void GetCatnip(int num){
+	public void GetCatnip(int num){
 		if (num <= 0) {
 			Debug.LogError ("get croquette num is minus or zero !");
 		} else {
@@ -101,7 +101,7 @@ public class ScoreBoardManager : MonoBehaviour {
 		}
 	}
 
-	void LostCatnip(int num){
+	public void LostCatnip(int num){
 		if (num >= 0) {
 			Debug.LogError ("lost croquette num is plus or zero !");
 		} else {
@@ -118,19 +118,19 @@ public class ScoreBoardManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		croquette_num = 0;
-		catnip_num = 1;
+		catnip_num = 0;
 		fatigue_gauge_long = fatigue_gauge.transform.localScale.x;
 		left_time = Time.time;
 
-		LostCroquette (-23);
-		LostCatnip (-1);
+		//		LostCroquette (-23);
+		//		LostCatnip (-1);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		left_time = Time.time;
+		//		left_time = Time.time;
 		displayCroqScore ();
-		fatigue_rate = Mathf.Abs(Mathf.Sin (Time.time));
+		//		fatigue_rate = Mathf.Abs(Mathf.Sin (Time.time));
 		ManagementObjectColor ();
 	}
 }
