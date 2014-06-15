@@ -15,3 +15,9 @@ EditorBuildSettings:
     path: Assets/Scene/UI/Score/ScoreScene.unity
   - enabled: 1
     path: Assets/Scene/UI/Title/StageSelectScene.unity
+  - enabled: 1
+    path: Assets/Scene/Explayn/Explain2.unity
+  - enabled: 1
+    path: Assets/Scene/Explayn/Explain3.unity
+  - enabled: 1
+    path: Assets/Scene/Explayn/Explain4.unity
